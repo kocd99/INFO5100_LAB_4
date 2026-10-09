@@ -26,8 +26,6 @@ public class MainJFrame extends javax.swing.JFrame {
     
     //view panel
     private ViewPanel viewPanel;
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainJFrame.class.getName());
 
     /**
      * Creates new form MainJFrame
@@ -45,10 +43,10 @@ public class MainJFrame extends javax.swing.JFrame {
         this.registrationPanel = new RegistrationPanel();
         
         //add form panel to bottom panel
-        BottomPanel.add(registrationPanel, "Form");
+        BottomPanel.add(registrationPanel);
         
         //show the form panel using card layout
-        this.cardLayout.show(BottomPanel, "Form");
+        this.cardLayout.next(BottomPanel);
         
         //disable the form button since it is the current panel in view
         FormButton.setEnabled(false);
@@ -134,7 +132,7 @@ public class MainJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No user is set", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             //show the view panel with the user in the panel
-            this.cardLayout.show(BottomPanel, "View");
+            this.cardLayout.next(BottomPanel);
             
             //disable view(current panel) button enable the form button
             ViewButton.setEnabled(false);
@@ -144,8 +142,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void FormButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FormButtonActionPerformed
 
-        //switch the form
-        this.cardLayout.show(BottomPanel, "Form");
+        //switch the card
+        this.cardLayout.next(BottomPanel);
         
         //disable the button
         FormButton.setEnabled(false);
@@ -191,10 +189,10 @@ public class MainJFrame extends javax.swing.JFrame {
         this.viewPanel = new ViewPanel(currentUser);
         
         //add the newly created view panel to bottom panel
-        BottomPanel.add(viewPanel,"View");
+        BottomPanel.add(viewPanel);
         
         //show the added new view panel in the card layout
-        this.cardLayout.show(BottomPanel, "View");
+        this.cardLayout.next(BottomPanel);
         
         //disable the view(durrent) button enable the form button
         ViewButton.setEnabled(false);
