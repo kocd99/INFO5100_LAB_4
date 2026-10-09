@@ -8,12 +8,17 @@ import model.User;
 import java.io.File;
 import java.awt.Image;
 import javax.swing.*;
+import java.awt.CardLayout;
 
 /**
  *
  * @author daghankoc
  */
 public class RegistrationPanel extends javax.swing.JPanel {
+    
+    
+    JPanel BottomPanel;
+    
 
     /**
      * Creates new form RegistrationPanel
@@ -21,6 +26,16 @@ public class RegistrationPanel extends javax.swing.JPanel {
     public RegistrationPanel() {
         initComponents();
     }
+    
+    /**
+     * Creates new form RegistrationPanel with the bottom panel
+     */
+    public RegistrationPanel(JPanel bottomPanel) {
+        initComponents();
+        this.BottomPanel = bottomPanel;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -289,9 +304,15 @@ public class RegistrationPanel extends javax.swing.JPanel {
             photoIcon = new ImageIcon(scaled);
         }
         
-        //call form complete on the main frame
-        MainJFrame frame = (MainJFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
-        frame.formComplete(newUser);
+        //create the view panel with the user data
+        ViewPanel viewPanel = new ViewPanel(newUser);
+        
+        //add the newly created view panel to bottom panel
+        this.BottomPanel.add(viewPanel);
+        CardLayout cardLayout = (CardLayout) this.BottomPanel.getLayout();
+        
+        //show the added new view panel in the card layout
+        cardLayout.next(this.BottomPanel);
         
         //success option dialog
         JOptionPane.showMessageDialog(

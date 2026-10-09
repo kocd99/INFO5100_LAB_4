@@ -16,6 +16,23 @@ public class ViewPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewPanel
      */
+    public ViewPanel() {
+        initComponents();
+        //greyout disable
+        FirstName.setEnabled(false);
+        LastName.setEnabled(false);
+        ageSpinner.setEnabled(false);
+        Email1.setEnabled(false);
+        Gendercombobox.setEnabled(false);
+        textPhoneNumber.setEnabled(false);
+        ContinentComboBox.setEnabled(false);
+        Hobby.setEnabled(false);
+        jCalendarComboBox1.setEnabled(false);
+    }
+    
+    /**
+     * Creates new form ViewPanel
+     */
     public ViewPanel(User userInfo) {
         initComponents();
         
@@ -37,7 +54,6 @@ public class ViewPanel extends javax.swing.JPanel {
             ImageIcon photoIcon = new ImageIcon(scaled);
             photoLabel.setIcon(photoIcon);
         }
-        
         
         //greyout disable
         FirstName.setEnabled(false);

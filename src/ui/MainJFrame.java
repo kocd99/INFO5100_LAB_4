@@ -4,8 +4,6 @@
  */
 package ui;
 
-import model.User;
-import javax.swing.*;
 import java.awt.CardLayout;
 
 
@@ -15,18 +13,12 @@ import java.awt.CardLayout;
  */
 public class MainJFrame extends javax.swing.JFrame {
     
-    //user we keep
-    private User currentUser;
     
     //card layout to control
     private CardLayout cardLayout;
     
-    //viewpanel
-    private RegistrationPanel registrationPanel;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainJFrame.class.getName());
     
-    //view panel
-    private ViewPanel viewPanel;
-
     /**
      * Creates new form MainJFrame
      */
@@ -37,19 +29,17 @@ public class MainJFrame extends javax.swing.JFrame {
         this.cardLayout = (CardLayout) BottomPanel.getLayout();
         
         // set size
-        this.setSize(500, 650);
+        this.setSize(550, 650);
         
         //create registration panel
-        this.registrationPanel = new RegistrationPanel();
+        RegistrationPanel registrationPanel = new RegistrationPanel(BottomPanel);
         
         //add form panel to bottom panel
         BottomPanel.add(registrationPanel);
         
         //show the form panel using card layout
         this.cardLayout.next(BottomPanel);
-        
-        //disable the form button since it is the current panel in view
-        FormButton.setEnabled(false);
+
     }
 
     /**
@@ -127,33 +117,26 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void ViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewButtonActionPerformed
         
-        //don't allow switching to view panel if no user is set
-        if (this.currentUser == null){
-            JOptionPane.showMessageDialog(this, "No user is set", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            //show the view panel with the user in the panel
-            this.cardLayout.next(BottomPanel);
-            
-            //disable view(current panel) button enable the form button
-            ViewButton.setEnabled(false);
-            FormButton.setEnabled(true);
-        }
+        //create registration panel
+        ViewPanel viewPanel = new ViewPanel();
+        
+        //add form panel to bottom panel
+        BottomPanel.add(viewPanel);
+        
+        //show the form panel using card layout
+        this.cardLayout.next(BottomPanel);
     }//GEN-LAST:event_ViewButtonActionPerformed
 
     private void FormButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FormButtonActionPerformed
 
-        //switch the card
+        //create registration panel
+        RegistrationPanel registrationPanel = new RegistrationPanel(BottomPanel);
+        
+        //add form panel to bottom panel
+        BottomPanel.add(registrationPanel);
+        
+        //show the form panel using card layout
         this.cardLayout.next(BottomPanel);
-        
-        //disable the button
-        FormButton.setEnabled(false);
-        
-        //enable the view button if there is a user
-        if(currentUser != null){
-            ViewButton.setEnabled(true);
-        } else {
-            ViewButton.setEnabled(false);
-        }
     }//GEN-LAST:event_FormButtonActionPerformed
 
     /**
@@ -181,23 +164,6 @@ public class MainJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new MainJFrame().setVisible(true));   
     }
     
-    public void formComplete(User u1) {
-        //record the successful user creation and switch to view panel
-        this.currentUser = u1;
-        
-        //create the view panel on form complete with the user info
-        this.viewPanel = new ViewPanel(currentUser);
-        
-        //add the newly created view panel to bottom panel
-        BottomPanel.add(viewPanel);
-        
-        //show the added new view panel in the card layout
-        this.cardLayout.next(BottomPanel);
-        
-        //disable the view(durrent) button enable the form button
-        ViewButton.setEnabled(false);
-        FormButton.setEnabled(true);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BottomPanel;
