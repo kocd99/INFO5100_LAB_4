@@ -9,7 +9,7 @@ import javax.swing.*;
 
 /**
  *
- * @author daghankoc
+ * @author Daghan Koc, Richmond Goode
  */
 public class ViewPanel extends javax.swing.JPanel {
 

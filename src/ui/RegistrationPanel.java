@@ -12,7 +12,7 @@ import java.awt.CardLayout;
 
 /**
  *
- * @author daghankoc
+ * @author Daghan Koc, Richmond Goode
  */
 public class RegistrationPanel extends javax.swing.JPanel {
     
